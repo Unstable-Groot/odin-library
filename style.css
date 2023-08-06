@@ -18,10 +18,15 @@ body {
     align-items: center;
     gap: 0.625rem;
     padding: 0 0.625rem;
+    background: rgb(1,1,38);
+    background: linear-gradient(150deg, rgba(1,1,38,1) 0%, rgba(67,255,133,1) 50%, rgba(0,212,255,1) 100%);
+    border-bottom: 5px solid rgb(155, 243, 255);
 }
 
 .info-container header {
     font-size: 1.875rem;
+    color: #fff;
+    text-shadow: #000000 3px 0 10px;
     text-align: center;
     font-weight: 800;
 }
@@ -105,6 +110,7 @@ body {
 
 /* tablet */
 @media screen and (min-width: 480px) {  
+
     .info-container {
         flex-direction: row;
         justify-content: space-evenly;
@@ -117,15 +123,21 @@ body {
     }
     
     .book-container {
-        display: grid;
         grid-template-columns: repeat(auto-fill, minmax(20rem, 1fr));
+        width: 95%;
+        margin: 0 auto;
     }
     
   }
 
 /* desktop */
 @media screen and (min-width: 1000px) {
-    body {
-      background-color: #d0e6ad;
+    
+    .book-container {
+        width: 90%;
+        max-width: 115rem;
     }
   }
+
+
+  
