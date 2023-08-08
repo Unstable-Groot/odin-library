@@ -9,6 +9,7 @@ book.prototype.createBookDom = function(arrayPos) {
     const domBook = document.createElement("div");
     domBook.setAttribute("class", "book");
     domBook.setAttribute("data-position", arrayPos);
+    domBook.style = (this.read) ? readGradient : "";
 
     const domTitle = document.createElement("div");
     domTitle.setAttribute("class", "title");
@@ -26,7 +27,8 @@ book.prototype.createBookDom = function(arrayPos) {
 
     const readButton = document.createElement("button");
     readButton.setAttribute("class", "read");
-    readButton.textContent = "Read";
+    readButton.textContent = (this.read) ? "Unread" : "Read";
+    readButton.style = (this.read) ? readGradient : "";
     readButton.addEventListener("click", readBook);
     buttonContainer.appendChild(readButton);
 
@@ -87,13 +89,27 @@ function removeBook() {
 }
 
 function readBook() {
-    return;
+    const arrayPos = this.parentNode.parentNode.dataset.position;
+
+    if (this.textContent == "Read"){
+        this.parentNode.parentNode.style = readGradient;
+        this.style = readGradient;
+        this.textContent = "Unread";
+        bookList[arrayPos].read = true;
+    }
+    else{
+        this.parentNode.parentNode.style = "";
+        this.style = "";
+        this.textContent = "Read";
+        bookList[arrayPos].read = false;
+    }
 }
 
 //container finder
 const container = document.querySelector(".container");
 const blurContainer = document.querySelector(".form-container");
 
+const readGradient = "background: linear-gradient(291deg, rgba(48,250,255,1) 0%, rgba(73,255,183,1) 100%);";
 const bookList = [];
 
 

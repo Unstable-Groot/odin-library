@@ -65,9 +65,9 @@ body {
     margin: clamp(0.625rem, 2vh, 1.25rem) 0.625rem;
     
     /* color controls */
-    --book-bg-color: #ffffff;
+    --book-bg-color: linear-gradient(0deg, rgba(92,92,92,1) 0%, rgba(232,232,232,1) 100%);
     --book-border-color: rgb(3, 3, 3);
-    background-color: var(--book-bg-color);
+    background: var(--book-bg-color);
     box-shadow: 0 1px 3px var(--book-border-color), 0 1px 2px var(--book-border-color);
     border: 1px solid var(--book-border-color);
     border-radius: 10px;
