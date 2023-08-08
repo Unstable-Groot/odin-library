@@ -69,8 +69,8 @@ function createNewBook() {
 
     //reseting form
     blurContainer.className = "form-container noblur";
-    title.style.backgroundColor = "#ff9191";
-    author.style.backgroundColor = "#ff9191";
+    title.style.backgroundColor = "#fff";
+    author.style.backgroundColor = "#fff";
     title.value = "";
     author.value = "";
     read.checked = false;
