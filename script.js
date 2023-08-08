@@ -33,22 +33,52 @@ book.prototype.createBookDom = function() {
     return domBook;
 }
 
+//container finder
+const container = document.querySelector(".container");
+const blurContainer = document.querySelector(".form-container");
 
 const bookList = [];
 
-function newBookButton() {
-    console.log(this);
-    const newBook = new book("Testing Title", "Testing Author", true); //Todo: replace with form input
+function createNewBook() {
+    const title = document.querySelector("#title");
+    const author = document.querySelector("#author");
+    const read = document.querySelector("#read");
+    if (title.value == "" || author.value == "") {
+        if (title.value == "") {
+            title.style.backgroundColor = "#ff9191";
+        }
 
+        if (author.value == "") {
+            author.style.backgroundColor = "#ff9191";
+        }
+
+        return;
+    }
+
+    //clear and redrawing grid to update changes to list
+    const newBook = new book(title.value, author.value, read.checked);
     bookList.push(newBook);
     const bookContainer = document.querySelector(".book-container");
     bookContainer.innerHTML = "";
-    bookList.forEach( (b) => {
-        bookContainer.appendChild(b.createBookDom());
-    });
+    bookList.forEach( (b) => bookContainer.appendChild(b.createBookDom()));
+
+    //reseting form
+    blurContainer.className = "form-container noblur";
+    title.style.backgroundColor = "#ff9191";
+    author.style.backgroundColor = "#ff9191";
+    title.value = "";
+    author.value = "";
+    read.checked = false;
+}
+
+function showForm(){
+    blurContainer.className = "form-container blur";
 }
 
 
+//button function assignment
+const formButton = document.querySelector(".info-btn");
+formButton.addEventListener("click", showForm);
 
-const addButton = document.querySelector(".info-btn");
-addButton.addEventListener("click", newBookButton);
+const addButton = document.querySelector("#submit");
+addButton.addEventListener("click", createNewBook);
