@@ -4,9 +4,11 @@ function book(title, author, read) {
     this.read = read;
 }
 
-book.prototype.createBookDom = function() {
+
+book.prototype.createBookDom = function(arrayPos) {
     const domBook = document.createElement("div");
     domBook.setAttribute("class", "book");
+    domBook.setAttribute("data-position", arrayPos);
 
     const domTitle = document.createElement("div");
     domTitle.setAttribute("class", "title");
@@ -20,24 +22,30 @@ book.prototype.createBookDom = function() {
 
     const buttonContainer = document.createElement("div");
     buttonContainer.setAttribute("class", "buttons");
+    domBook.appendChild(buttonContainer);
+
     const readButton = document.createElement("button");
     readButton.setAttribute("class", "read");
     readButton.textContent = "Read";
+    readButton.addEventListener("click", readBook);
+    buttonContainer.appendChild(readButton);
+
     const removeButton = document.createElement("button");
     removeButton.setAttribute("class", "remove");
     removeButton.textContent = "Remove";
-    buttonContainer.appendChild(readButton);
+    removeButton.addEventListener("click", removeBook);
     buttonContainer.appendChild(removeButton);
-    domBook.appendChild(buttonContainer);
     
     return domBook;
 }
 
-//container finder
-const container = document.querySelector(".container");
-const blurContainer = document.querySelector(".form-container");
-
-const bookList = [];
+function redrawGrid(title, author, read) {
+    const bookContainer = document.querySelector(".book-container");
+    bookContainer.innerHTML = "";
+    for (let i = 0; i < bookList.length; i++) {
+        bookContainer.appendChild(bookList[i].createBookDom(i));
+    }
+}
 
 function createNewBook() {
     const title = document.querySelector("#title");
@@ -55,12 +63,9 @@ function createNewBook() {
         return;
     }
 
-    //clear and redrawing grid to update changes to list
     const newBook = new book(title.value, author.value, read.checked);
     bookList.push(newBook);
-    const bookContainer = document.querySelector(".book-container");
-    bookContainer.innerHTML = "";
-    bookList.forEach( (b) => bookContainer.appendChild(b.createBookDom()));
+    redrawGrid(title, author, read);
 
     //reseting form
     blurContainer.className = "form-container noblur";
@@ -71,9 +76,25 @@ function createNewBook() {
     read.checked = false;
 }
 
-function showForm(){
+function showForm() {
     blurContainer.className = "form-container blur";
 }
+
+function removeBook() {
+    const arrayPos = this.parentNode.parentNode.dataset.position;
+    bookList.splice(arrayPos, 1);
+    redrawGrid();
+}
+
+function readBook() {
+    return;
+}
+
+//container finder
+const container = document.querySelector(".container");
+const blurContainer = document.querySelector(".form-container");
+
+const bookList = [];
 
 
 //button function assignment
