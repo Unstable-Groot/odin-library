@@ -69,13 +69,8 @@ function createNewBook() {
     bookList.push(newBook);
     redrawGrid(title, author, read);
 
-    //reseting form
-    blurContainer.className = "form-container noblur";
-    title.style.backgroundColor = "#fff";
-    author.style.backgroundColor = "#fff";
-    title.value = "";
-    author.value = "";
-    read.checked = false;
+    cancelForm();
+    
 }
 
 function showForm() {
@@ -86,6 +81,15 @@ function removeBook() {
     const arrayPos = this.parentNode.parentNode.dataset.position;
     bookList.splice(arrayPos, 1);
     redrawGrid();
+}
+
+function cancelForm() {
+    blurContainer.className = "form-container noblur";
+    title.style.backgroundColor = "#fff";
+    author.style.backgroundColor = "#fff";
+    title.value = "";
+    author.value = "";
+    read.checked = false;
 }
 
 function readBook() {
@@ -119,3 +123,6 @@ formButton.addEventListener("click", showForm);
 
 const addButton = document.querySelector("#submit");
 addButton.addEventListener("click", createNewBook);
+
+const cancelButton = document.querySelector("#cancel");
+cancelButton.addEventListener("click", cancelForm);

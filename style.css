@@ -2,6 +2,7 @@
 * {
     padding: 0;
     margin: 0;
+    color: black;
     /*border: 1px solid red;*/
     box-sizing: border-box;
 }
@@ -176,8 +177,19 @@ label {
     gap: 10px;
 }
 
+.form-btn {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+}
+
+#cancel {
+    width: 6.25rem;
+    background-color: #ff2d2d;
+}
+
 #submit {
-    align-self: end;
     width: 6.25rem;
     background-color: #53ec3f;
 }
